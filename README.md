@@ -27,9 +27,9 @@
 Computer Science student (**COMSATS University Islamabad**, Expected Jan 2027) and former **Software Engineering Intern at Neuronix Technologies**. 
 
 Specialized in architecting and shipping production **identity-verification (KYB)**, **transaction-screening**, and **citation-grounded LLM systems**. Core engineering competencies include:
-- **Event-Driven Microservices:** Asynchronous multi-service pipelines built with **Go (Gin)**, **Python (FastAPI)**, **Apache Kafka**, and **PostgreSQL (asyncpg / SQLAlchemy)**.
+- **Event-Driven Microservices & Concurrency:** Asynchronous multi-service pipelines and concurrent transactional backends built with **Go (Gin)**, **Python (FastAPI)**, **Apache Kafka**, and **PostgreSQL / SQLite** with multi-process epoch lease fencing.
 - **Applied Generative AI & Retrieval (RAG):** Citation-verified hybrid retrieval architectures combining dense embeddings (**BGE**) and sparse lexical search (**BM25**) with **Reciprocal Rank Fusion (RRF)** in **Qdrant**, strict confidence guardrails, **Langfuse** observability, and **Ragas** automated evaluation.
-- **Explainable Machine Learning & Vision:** Diagnostic clinical risk assessment systems evaluated with **SHAP / LIME** feature attributions, and deepfake media verification pipelines with **PyTorch** and **OpenCV**.
+- **Clinical AI & Diagnostic Intelligence:** Government-grade diagnostic decision support systems, Decimal physical quantity evaluation (zero-tolerance), safe clinical abstention workflows, and **SHAP / LIME** explainability.
 
 ---
 
@@ -85,6 +85,7 @@ Specialized in architecting and shipping production **identity-verification (KYB
 ![pyttsx3](https://img.shields.io/badge/pyttsx3-1E293B?style=for-the-badge&logo=soundcharts&logoColor=white)
 ![PyAudio](https://img.shields.io/badge/PyAudio-0284C7?style=for-the-badge&logo=audioboom&logoColor=white)
 ![pygame](https://img.shields.io/badge/pygame-4B5563?style=for-the-badge&logo=nintendogamecube&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
@@ -98,7 +99,43 @@ Specialized in architecting and shipping production **identity-verification (KYB
 
 Below is a detailed inspection of production systems engineered across enterprise internships and advanced implementations:
 
-### 1. Citerator — Citation-Verified AML/KYC Compliance RAG Platform
+### 1. MedMind — Clinical Diagnostic Intelligence & Longitudinal Record Engine
+**Repository:** [github.com/sultanriaz/FYP-Medmind](https://github.com/sultanriaz/FYP-Medmind) *(Enterprise Clinical Repo)* &nbsp;|&nbsp; **Stack:** Python (FastAPI), Next.js 16 (React 19, TypeScript), SQLite Concurrency (WAL + Multi-Process Epoch Lease Fencing), Decimal Physics Evaluator, Hybrid Clinical RAG
+
+> **System Purpose:** Enterprise-grade clinical diagnostic intelligence and longitudinal health record engine engineered under strict healthcare data-safety standards. Implements zero-leak upload boundaries, multi-process distributed epoch lease fencing (`BEGIN IMMEDIATE`, monotonic lease bumping, dead-worker takeover), zero-tolerance Decimal physical quantity evaluation (`rel_tol=0.0, abs_tol=1e-6`), safe clinical abstention on corrupted OCR values, and dynamic SQL query tracing with sub-10ms response times.
+
+```mermaid
+flowchart TD
+    Doc["Clinical Report (PDF / Image)"] --> UploadGate["Zero-Leak Upload Boundary (FastAPI)"]
+    UploadGate --> ACIDRollback["Atomic DB Staging & Storage Isolation"]
+    ACIDRollback --> Parser["Medical Parser & Decimal Evaluator"]
+    
+    subgraph "Strict Evaluator & Safe Abstention"
+        Parser --> BoundsCheck{"Physiologic Interval & Syntax Check"}
+        BoundsCheck -->|"Valid Numerical Interval"| UnitNorm["Decimal Physical Quantity Normalization"]
+        BoundsCheck -->|"Corrupted OCR / Anomaly"| Abstain["Safe Clinical Abstention (Route to Review)"]
+    end
+    
+    UnitNorm --> Reconcile["Multi-Process Reconciliation Worker"]
+    
+    subgraph "Distributed Epoch Lease Fencing"
+        Reconcile --> Fencing{"BEGIN IMMEDIATE Epoch Fencing"}
+        Fencing -->|"Active Valid Lease"| WriteProjections["Atomic Projection Rebuild & Assessment Save"]
+        Fencing -->|"Epoch Superseded / Stale"| FenceError["FencingViolationError (Fail-Stop Isolation)"]
+    end
+    
+    WriteProjections --> LongitudinalDB[("Longitudinal Health Record Timeline")]
+    WriteProjections --> ClinEngine["Clinical Diagnostic Intelligence & Early Warning"]
+    ClinEngine --> Workbench["Next.js 16 Clinician Workbench & Audit Ledger"]
+```
+
+- **Multi-Process Concurrency Safety:** Connection-level SQLite epoch lease fencing across longitudinal projections and clinical assessment write paths. Validated under genuine subprocess `SIGKILL` termination, mid-rebuild recovery, and monotonic epoch bumping with 0 cross-patient state leakage.
+- **Strict Clinical Evaluator v2.0:** Dual-engine evaluation (Validated Decimal Physics & Strict Bipartite Matching) operating at zero tolerance (`rel_tol=0.0, abs_tol=1e-6`). Enforces safe clinical abstention rather than heuristic guessing when OCR boundaries are corrupted.
+- **Verified Clinical Corpus & Quality Gates:** 229/229 full backend test suite passing, 102/102 clinical corpus cases verified (186/186 measurements matched strictly), 17/17 live negative upload tests with zero DB/filesystem orphan leaks, and dynamic SQL tracing reducing query counts by 99.6% at scale ($N=500$).
+
+---
+
+### 2. Citerator — Citation-Verified AML/KYC Compliance RAG Platform
 **Repository:** [github.com/sultanriaz/citerator](https://github.com/sultanriaz/citerator) &nbsp;|&nbsp; **Stack:** Python (FastAPI), Qdrant, BGE Embeddings, BM25, Cross-Encoder Reranking, Langfuse, Ragas
 
 > **System Purpose:** Enterprise Question-Answering engine built for AML/KYC compliance officers to query dense regulatory corpuses with cryptographically verifiable source chunk citations and strict zero-hallucination refusal guarantees.
@@ -130,7 +167,7 @@ flowchart TD
 
 ---
 
-### 2. Real-Time Financial AI Intelligence Platform
+### 3. Real-Time Financial AI Intelligence Platform
 **Repository:** [github.com/sultanriaz/financial-ai-platform](https://github.com/sultanriaz/financial-ai-platform) &nbsp;|&nbsp; **Stack:** Python (FastAPI), Apache Kafka, PyTorch, HuggingFace FinBERT, spaCy NER, asyncpg, PostgreSQL, WebSockets
 
 > **System Purpose:** Distributed sub-second streaming engine ingesting financial news headlines from major market wires, resolving named entity tickers, computing financial sentiment vectors, and broadcasting actionable insights via persistent WebSockets.
@@ -163,7 +200,7 @@ sequenceDiagram
 
 ---
 
-### 3. NeuroVerify KYB & Transaction Screening Modules (Neuronix Technologies)
+### 4. NeuroVerify KYB & Transaction Screening Modules (Neuronix Technologies)
 **Engineering Context:** Software Engineering Internship at Neuronix Technologies &nbsp;|&nbsp; **Stack:** Go (Gin), Python (FastAPI), Apache Kafka, PostgreSQL, Docker Compose, Google Gemini, LangChain, JWT
 
 > **System Purpose:** Multi-service business identity verification (KYB) and transaction risk screening architecture automating commercial registry cross-referencing and AML compliance checks.
@@ -194,7 +231,7 @@ graph TD
 
 ---
 
-## 🔬 Featured Public Engineering Repositories
+## 🔬 Featured Engineering Repositories
 
 <table align="center" width="100%">
   <thead>
@@ -205,6 +242,18 @@ graph TD
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td>
+        <b><a href="https://github.com/sultanriaz/FYP-Medmind">FYP-Medmind</a></b><br/>
+        <sub>Clinical Diagnostic & Longitudinal Engine</sub>
+      </td>
+      <td>
+        Enterprise clinical diagnostic platform with multi-process SQLite epoch lease fencing, zero-leak upload boundaries, Decimal physical quantity evaluation (zero-tolerance), and safe clinical abstention on corrupted OCR values.
+      </td>
+      <td>
+        <code>FastAPI</code> <code>Next.js 16</code> <code>SQLite Concurrency</code> <code>Decimal Physics</code> <code>Python</code> <code>TypeScript</code>
+      </td>
+    </tr>
     <tr>
       <td>
         <b><a href="https://github.com/sultanriaz/citerator">citerator</a></b><br/>

@@ -29,7 +29,7 @@ Computer Science student (**COMSATS University Islamabad**, Expected Jan 2027) a
 Specialized in architecting and shipping production **identity-verification (KYB)**, **transaction-screening**, and **citation-grounded LLM systems**. Core engineering competencies include:
 - **Event-Driven Microservices & Concurrency:** Asynchronous multi-service pipelines and concurrent transactional backends built with **Go (Gin)**, **Python (FastAPI)**, **Apache Kafka**, and **PostgreSQL / SQLite** with multi-process epoch lease fencing.
 - **Applied Generative AI & Retrieval (RAG):** Citation-verified hybrid retrieval architectures combining dense embeddings (**BGE**) and sparse lexical search (**BM25**) with **Reciprocal Rank Fusion (RRF)** in **Qdrant**, strict confidence guardrails, **Langfuse** observability, and **Ragas** automated evaluation.
-- **Clinical AI & Diagnostic Intelligence:** Government-grade diagnostic decision support systems, Decimal physical quantity evaluation (zero-tolerance), safe clinical abstention workflows, and **SHAP / LIME** explainability.
+- **Clinical AI & Hardware-Accelerated LLMs:** Enterprise clinical diagnostic decision support systems, **NVIDIA T1200 4-bit CUDA GPU** hardware acceleration, fine-tuned **LoRA v4** generative reasoning with **LangGraph**, Decimal physical quantity evaluation (zero-tolerance), and **SHAP / LIME** explainability.
 
 ---
 
@@ -45,7 +45,11 @@ Specialized in architecting and shipping production **identity-verification (KYB
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 ### 🧠 LLM, RAG & Agentic AI
+![LangGraph](https://img.shields.io/badge/LangGraph-23272F?style=for-the-badge&logo=langchain&logoColor=white)
 ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)
+![PEFT / LoRA](https://img.shields.io/badge/PEFT_LoRA-FF6F00?style=for-the-badge&logo=pytorch&logoColor=white)
+![NVIDIA CUDA](https://img.shields.io/badge/NVIDIA_CUDA_12.1-76B900?style=for-the-badge&logo=nvidia&logoColor=white)
+![BitsAndBytes](https://img.shields.io/badge/BitsAndBytes_(4--bit_NF4)-1E293B?style=for-the-badge&logo=databricks&logoColor=white)
 ![Google Gemini](https://img.shields.io/badge/Google_Gemini-8E75C2?style=for-the-badge&logo=googlegemini&logoColor=white)
 ![Qdrant](https://img.shields.io/badge/Qdrant-DC2626?style=for-the-badge&logo=qdrant&logoColor=white)
 ![Langfuse](https://img.shields.io/badge/Langfuse-000000?style=for-the-badge&logo=langfuse&logoColor=white)
@@ -100,9 +104,9 @@ Specialized in architecting and shipping production **identity-verification (KYB
 Below is a detailed inspection of production systems engineered across enterprise internships and advanced implementations:
 
 ### 1. MedMind — Clinical Diagnostic Intelligence & Longitudinal Record Engine
-**Repository:** [github.com/sultanriaz/FYP-Medmind](https://github.com/sultanriaz/FYP-Medmind) *(Enterprise Clinical Repo)* &nbsp;|&nbsp; **Stack:** Python (FastAPI), Next.js 16 (React 19, TypeScript), SQLite Concurrency (WAL + Multi-Process Epoch Lease Fencing), Decimal Physics Evaluator, Hybrid Clinical RAG
+**Repository:** [github.com/sultanriaz/FYP-Medmind](https://github.com/sultanriaz/FYP-Medmind) *(Enterprise Clinical Repo)* &nbsp;|&nbsp; **Stack:** Python (FastAPI), PyTorch (CUDA 12.1), Transformers & PEFT (MedMind LoRA v4), BitsAndBytes (4-bit NF4 Quantization), LangGraph Orchestrator, Next.js 16 (React 19, TypeScript), SQLite Concurrency (WAL + Multi-Process Epoch Lease Fencing), Decimal Physics Evaluator
 
-> **System Purpose:** Enterprise-grade clinical diagnostic intelligence and longitudinal health record engine engineered under strict healthcare data-safety standards. Implements zero-leak upload boundaries, multi-process distributed epoch lease fencing (`BEGIN IMMEDIATE`, monotonic lease bumping, dead-worker takeover), zero-tolerance Decimal physical quantity evaluation (`rel_tol=0.0, abs_tol=1e-6`), safe clinical abstention on corrupted OCR values, and dynamic SQL query tracing with sub-10ms response times.
+> **System Purpose:** Enterprise-grade clinical diagnostic intelligence, fine-tuned medical reasoning, and longitudinal health record engine engineered under strict healthcare data-safety standards. Features fine-tuned MedMind LoRA v4 generative model accelerated via 4-bit NF4 quantization on an NVIDIA T1200 Laptop GPU, multi-stage LangGraph clinical reasoning, zero-leak upload boundaries, multi-process distributed epoch lease fencing (`BEGIN IMMEDIATE`, monotonic lease bumping, dead-worker takeover), zero-tolerance Decimal physical quantity evaluation (`rel_tol=0.0, abs_tol=1e-6`), safe clinical abstention on corrupted OCR values, and dynamic SQL query tracing with sub-10ms response times.
 
 ```mermaid
 flowchart TD
@@ -126,12 +130,26 @@ flowchart TD
     
     WriteProjections --> LongitudinalDB[("Longitudinal Health Record Timeline")]
     WriteProjections --> ClinEngine["Clinical Diagnostic Intelligence & Early Warning"]
+    
+    subgraph "4-Bit CUDA Hardware Acceleration & Clinical Reasoning"
+        LongitudinalDB --> LangGraph["LangGraph Clinical Orchestrator"]
+        LangGraph --> CudaGPU["NVIDIA T1200 GPU (BitsAndBytes 4-Bit NF4)"]
+        CudaGPU --> QwenLoRA["Qwen2.5-1.5B + MedMind LoRA v4 (1.17 GB VRAM)"]
+        QwenLoRA --> GroundingCheck{"Numerical Grounding & Safety Filter"}
+        GroundingCheck -->|"Evidence Grounded"| VerifiedAns["Grounded Natural Clinical Explanation"]
+        GroundingCheck -->|"Emergency Signal"| LifeSafety["Instantaneous Emergency Protocol Escalation"]
+    end
+
     ClinEngine --> Workbench["Next.js 16 Clinician Workbench & Audit Ledger"]
+    VerifiedAns --> Workbench
+    LifeSafety --> Workbench
 ```
 
+- **Trained LoRA v4 & Hardware Acceleration:** Quantized fine-tuned Qwen2.5-1.5B (`MedMind LoRA v4`) with `bitsandbytes` NF4 onto an **NVIDIA T1200 Laptop GPU** (4 GB VRAM, Turing cc 7.5, PyTorch CUDA 12.1). Reduced model memory footprint to **1,169.57 MB VRAM** (28.5% utilization), achieving 100% generative model primacy with 0% silent fallbacks across the 30-case clinical evaluation matrix.
+- **LangGraph Clinical Reasoning & Balanced Safety:** Orchestrated multi-stage dynamic retrieval, numerical grounding, reflection, and context-aware emergency safety routing. Enforces strict ADA diagnostic criteria ($\ge 126\text{ mg/dL}$ fasting glucose) and instantaneous emergency escalation for acute events (anaphylaxis, stroke, severe hyperkalemia, severe thrombocytopenia) with zero prompt wrapping and zero fallback degradation.
 - **Multi-Process Concurrency Safety:** Connection-level SQLite epoch lease fencing across longitudinal projections and clinical assessment write paths. Validated under genuine subprocess `SIGKILL` termination, mid-rebuild recovery, and monotonic epoch bumping with 0 cross-patient state leakage.
 - **Strict Clinical Evaluator v2.0:** Dual-engine evaluation (Validated Decimal Physics & Strict Bipartite Matching) operating at zero tolerance (`rel_tol=0.0, abs_tol=1e-6`). Enforces safe clinical abstention rather than heuristic guessing when OCR boundaries are corrupted.
-- **Verified Clinical Corpus & Quality Gates:** 229/229 full backend test suite passing, 102/102 clinical corpus cases verified (186/186 measurements matched strictly), 17/17 live negative upload tests with zero DB/filesystem orphan leaks, and dynamic SQL tracing reducing query counts by 99.6% at scale ($N=500$).
+- **Verified Clinical Corpus & Quality Gates:** **309/309 full backend test suite passing (100%)**, 102/102 clinical corpus cases verified (186/186 measurements matched strictly), 30/30 GPU clinical evaluation matrix passed with zero degradations, 17/17 live negative upload tests with zero DB/filesystem orphan leaks, and dynamic SQL tracing reducing query counts by 99.6% at scale ($N=500$).
 
 ---
 
@@ -245,13 +263,13 @@ graph TD
     <tr>
       <td>
         <b><a href="https://github.com/sultanriaz/FYP-Medmind">FYP-Medmind</a></b><br/>
-        <sub>Clinical Diagnostic & Longitudinal Engine</sub>
+        <sub>Clinical Diagnostic & AI Reasoning Engine</sub>
       </td>
       <td>
-        Enterprise clinical diagnostic platform with multi-process SQLite epoch lease fencing, zero-leak upload boundaries, Decimal physical quantity evaluation (zero-tolerance), and safe clinical abstention on corrupted OCR values.
+        Enterprise clinical diagnostic platform powered by fine-tuned MedMind LoRA v4 accelerated on NVIDIA T1200 4-bit CUDA GPU. Features LangGraph clinical reasoning, multi-process SQLite epoch lease fencing, Decimal physical quantity evaluation, and 309/309 passing tests.
       </td>
       <td>
-        <code>FastAPI</code> <code>Next.js 16</code> <code>SQLite Concurrency</code> <code>Decimal Physics</code> <code>Python</code> <code>TypeScript</code>
+        <code>FastAPI</code> <code>PyTorch CUDA</code> <code>LangGraph</code> <code>BitsAndBytes NF4</code> <code>Next.js 16</code> <code>SQLite Concurrency</code>
       </td>
     </tr>
     <tr>

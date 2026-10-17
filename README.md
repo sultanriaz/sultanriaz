@@ -218,7 +218,57 @@ flowchart TD
 
 ---
 
-### 3. Real-Time Financial AI Intelligence Platform
+### 3. Company Intelligence CRM — Autonomous Multi-Agent Research & Outreach Automation Platform
+**Repository:** [github.com/sultanriaz/company-intelligence-crm](https://github.com/sultanriaz/company-intelligence-crm) &nbsp;|&nbsp; **Stack:** Python (FastAPI), React 18 (TypeScript), PostgreSQL 16 (SQLAlchemy 2.x Async), Celery, Redis, Anti-SSRF Crawler, Playwright, Transactional Outbox, AES-256-GCM, HMAC-SHA256, Tailwind CSS
+
+> **System Purpose:** Enterprise-grade multi-agent platform designed to discover companies, crawl and parse corporate websites with defense-in-depth scrapers, synthesize company intelligence, automatically qualify sales leads, manage relationships via a custom CRM, and execute compliant, personalized outbound email campaigns with human-in-the-loop review and transactional outbox guarantees.
+
+```mermaid
+flowchart TD
+    User["Sales Ops / Admin"] --> Dashboard["React 18 + TypeScript CRM UI"]
+    Dashboard --> Gateway["FastAPI REST API Gateway"]
+    Gateway --> Orchestrator["Supervisor Workflow Engine (12-State Machine)"]
+    
+    subgraph "Phase 1: Discovery & Extraction"
+        Orchestrator --> Disc["Website Discovery Agent"]
+        Disc --> Scraper["Web Scraping Agent (Anti-SSRF & Token Bucket)"]
+        Scraper --> Parser["HTML & Metadata Content Normalizer"]
+    end
+    
+    subgraph "Phase 2: Research & Verification"
+        Parser --> ResAgent["Company Research Agent"]
+        ResAgent --> VerAgent["Data Verification Agent (Grounding & Confidence >= 0.60)"]
+        VerAgent --> InsAgent["Business Insights Agent (ICP Fit & SWOT)"]
+    end
+    
+    subgraph "Phase 3: Qualification & CRM Sync"
+        InsAgent --> QualAgent["Lead Qualification Agent (0-100 Scoring)"]
+        QualAgent --> CRMSync["CRM Sync Agent (PostgreSQL Multi-Tenant DB)"]
+    end
+    
+    subgraph "Phase 4: Outreach & Delivery"
+        CRMSync --> DraftAgent["Email Content Agent (CAN-SPAM Tokens)"]
+        DraftAgent --> Gate{"Human Approval Gate"}
+        Gate -->|"Approved"| Outbox["Transactional Outbox (SHA-256 Idempotency)"]
+        Gate -->|"Rejected"| Staging["Quarantined / Edit Draft"]
+        Outbox --> DeliveryAgent["Delivery Agent (Mock, Resend, SendGrid, SES)"]
+        DeliveryAgent --> TrackingAgent["Tracking Agent (HMAC-SHA256 Webhook & Auto-Suppression)"]
+    end
+    
+    CRMSync --> CRMDB[("PostgreSQL 16 (30 Schema Entities)")]
+    Outbox --> CRMDB
+    TrackingAgent --> CRMDB
+```
+
+- **11-Agent State Machine & Deterministic Ownership:** Autonomous execution through 12 formal states (`CREATED` ➔ `DISCOVERING` ➔ `EXTRACTING` ➔ `RESEARCHING` ➔ `VERIFYING` ➔ `ANALYZING` ➔ `SAVING` ➔ `EMAIL_PREPARATION` ➔ `APPROVAL_PENDING` ➔ `SENDING` ➔ `COMPLETED`). Deterministic Python code owns all database transactions, rate limits, outbox dispatches, and budget enforcement ($2.00 max cost, 300s timeout guardrails).
+- **Anti-SSRF Web Security & Scraping Engine:** Hardened web crawling infrastructure enforcing pre-flight DNS checks against RFC 1918 subnets, IPv6 loopbacks, link-local IPs, and cloud metadata services (`169.254.169.254`, `metadata.google.internal`), coupled with custom HTTPX per-redirect validation hooks and robots.txt caching.
+- **Custom Multi-Tenant CRM Engine:** 30 relational entities declared in SQLAlchemy 2.x async ORM with `lazy="selectin"` eager loading, automated Alembic migrations, explainable multi-dimensional lead scoring (0–100), and interactive Kanban pipeline management.
+- **Transactional Outbox & Delivery Safeguards:** Double-send idempotency locks generated via deterministic SHA-256 keys, human approval gates (`APPROVAL_PENDING`), automatic CAN-SPAM physical postal address and unsubscribe token injection, and HMAC-SHA256 authenticated provider webhooks with instant bounce/complaint suppression.
+- **Automated Test Suite & Quality Gates:** **37/37 automated tests passing (100%)** across unit, integration, and full end-to-end acceptance scenarios, with a zero-warning React 18 production build (`tsc && vite build`).
+
+---
+
+### 4. Real-Time Financial AI Intelligence Platform
 **Repository:** [github.com/sultanriaz/financial-ai-platform](https://github.com/sultanriaz/financial-ai-platform) &nbsp;|&nbsp; **Stack:** Python (FastAPI), Apache Kafka, PyTorch, HuggingFace FinBERT, spaCy NER, asyncpg, PostgreSQL, WebSockets
 
 > **System Purpose:** Distributed sub-second streaming engine ingesting financial news headlines from major market wires, resolving named entity tickers, computing financial sentiment vectors, and broadcasting actionable insights via persistent WebSockets.
@@ -251,7 +301,7 @@ sequenceDiagram
 
 ---
 
-### 4. NeuroVerify KYB & Transaction Screening Modules (Neuronix Technologies)
+### 5. NeuroVerify KYB & Transaction Screening Modules (Neuronix Technologies)
 **Engineering Context:** Software Engineering Internship at Neuronix Technologies &nbsp;|&nbsp; **Stack:** Go (Gin), Python (FastAPI), Apache Kafka, PostgreSQL, Docker Compose, Google Gemini, LangChain, JWT
 
 > **System Purpose:** Multi-service business identity verification (KYB) and transaction risk screening architecture automating commercial registry cross-referencing and AML compliance checks.
@@ -315,6 +365,18 @@ graph TD
       </td>
       <td>
         <code>FastAPI</code> <code>Qdrant</code> <code>LangChain</code> <code>BM25</code> <code>Langfuse</code> <code>Ragas</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><a href="https://github.com/sultanriaz/company-intelligence-crm">company-intelligence-crm</a></b><br/>
+        <sub>Multi-Agent CRM & Outreach Engine</sub>
+      </td>
+      <td>
+        Autonomous multi-agent company intelligence platform coordinating 11 specialist agents through a deterministic 12-state machine. Features an anti-SSRF crawler, 30-entity relational CRM, and transactional outbox with double-send idempotency locks.
+      </td>
+      <td>
+        <code>FastAPI</code> <code>React 18</code> <code>PostgreSQL</code> <code>SQLAlchemy 2.x</code> <code>Celery</code> <code>Redis</code>
       </td>
     </tr>
     <tr>

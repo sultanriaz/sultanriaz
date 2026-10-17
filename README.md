@@ -154,34 +154,67 @@ flowchart TD
 ---
 
 ### 2. Citerator — Citation-Verified AML/KYC Compliance RAG Platform
-**Repository:** [github.com/sultanriaz/citerator](https://github.com/sultanriaz/citerator) &nbsp;|&nbsp; **Stack:** Python (FastAPI), Qdrant, BGE Embeddings, BM25, Cross-Encoder Reranking, Langfuse, Ragas
+**Repository:** [github.com/sultanriaz/citerator](https://github.com/sultanriaz/citerator) &nbsp;|&nbsp; **Stack:** Python (FastAPI), React 19 (TypeScript), Qdrant (Dense + BM25 Hybrid), BGE Embeddings, Cross-Encoder Reranking, Multi-Tenant BOLA/IDOR Security, Langfuse, Ragas, HMAC Audit Ledger
 
-> **System Purpose:** Enterprise Question-Answering engine built for AML/KYC compliance officers to query dense regulatory corpuses with cryptographically verifiable source chunk citations and strict zero-hallucination refusal guarantees.
+> **System Purpose:** Enterprise-grade Question-Answering and regulatory research engine engineered for AML/KYC compliance analysts. Features cryptographically verifiable source citations, strict default-deny multi-tenant isolation, cross-tenant leak prevention at retrieval/rerank/citation layers, EU AI Act / ISO 42001 compliance controls, and calibrated zero-hallucination refusal guarantees.
 
 ```mermaid
 flowchart TD
-    Query["User Regulatory Query"] --> HybridSearch["Hybrid Search Controller"]
-    HybridSearch --> Dense["Dense BGE Embeddings"]
-    HybridSearch --> Sparse["Sparse Lexical BM25"]
-    Dense --> Qdrant[("Qdrant Vector DB")]
-    Sparse --> Qdrant
-    Qdrant --> RRF["Reciprocal Rank Fusion (RRF)"]
-    RRF --> Rerank["Cross-Encoder Reranker (top-k=5)"]
-    Rerank --> SigmoidGuard["3-Band Sigmoid Confidence Guardrail"]
-    SigmoidGuard -->|"Score < 0.60 (Insufficient)"| Refusal["Deterministic Rejection & Escalation"]
-    SigmoidGuard -->|"0.60 <= Score < 0.82 (Low)"| Hedged["Hedged Answer + Mandatory Disclaimer"]
-    SigmoidGuard -->|"Score >= 0.82 (Confident)"| LLMGen["Grounding Prompt + Gemini / Claude"]
-    LLMGen --> CitationVerify["Citation Span Verifier"]
-    CitationVerify --> Telemetry["Langfuse Distributed Tracing"]
-    Telemetry --> ClientResponse["Validated Answer with Exact Page/Paragraph Citations"]
+    User["Compliance Analyst / Auditor"] --> ClientUI["React 19 + TypeScript Web Console"]
+    
+    subgraph "Boundary 1: Server-Side Identity Gate"
+        ClientUI --> AuthGate["API Key & Server-Side Tenant Registry"]
+        AuthGate -->|"Reject Forged Header / Escalation"| Deny["403 Forbidden"]
+        AuthGate -->|"Verified TenantContext"| RouteHandler["FastAPI Application Gateway"]
+    end
+    
+    subgraph "Boundary 2: Scoped Semantic Cache"
+        RouteHandler --> CacheLookup{"Tenant-Partitioned Cache (v1:tenant:hash)"}
+        CacheLookup -->|"Exact / Semantic Hit"| CachedResponse["Instant Answer (<15ms)"]
+    end
+    
+    subgraph "Boundary 3: Retrieval & Index Filtering"
+        CacheLookup -->|"Cache Miss"| HybridEngine["Hybrid Retrieval Coordinator"]
+        HybridEngine --> Dense["Dense BGE Embedder"]
+        HybridEngine --> Sparse["Sparse BM25 Lexical Embedder"]
+        Dense --> Qdrant[("Qdrant Vector DB")]
+        Sparse --> Qdrant
+        Qdrant -->|"Enforce tenant_id Payload Filter"| RRF["Reciprocal Rank Fusion (RRF)"]
+        RRF --> PostDrop["Post-Retrieval Defense-in-Depth Drop Guard"]
+    end
+    
+    subgraph "Boundary 4: Pre-Rerank Neutralization"
+        PostDrop --> PreRerankAuth["Pre-Rerank Tenant Authorization Guard"]
+        PreRerankAuth --> Reranker["Cross-Encoder Reranker (top-k=5)"]
+    end
+    
+    subgraph "Boundary 5: Confidence Gating & Grounded Generation"
+        Reranker --> SigmoidGating["3-Band Sigmoid Confidence Guardrail"]
+        SigmoidGating -->|"Score < 0.60 (Insufficient)"| Refuse["Deterministic Rejection & Escalation"]
+        SigmoidGating -->|"0.60 <= Score < 0.82 (Low)"| Hedged["Hedged Answer + Mandatory Disclaimer"]
+        SigmoidGating -->|"Score >= 0.82 (Confident)"| LLM["Grounding Prompt + Gemini / Claude"]
+        LLM --> CitationResolver["Citation Authorization & Excerpt Matcher"]
+        CitationResolver --> CacheStore["Store Scoped Cache (v1:tenant:hash)"]
+    end
+    
+    subgraph "Observability & Audit Ledger"
+        LLM --> LangfuseTrace["Langfuse Distributed Tracing"]
+        RouteHandler --> AuditLedger[("HMAC-SHA256 Tamper-Evident Audit Chain")]
+    end
+    
+    CitationResolver --> FinalResponse["Verified Answer with Clickable Citations"]
+    Refuse --> FinalResponse
+    Hedged --> FinalResponse
 ```
 
-- **Retrieval Pipeline:** Dense vector search (BAAI/bge-small-en-v1.5) and sparse BM25 retrieval fused via **Reciprocal Rank Fusion (RRF)** in Qdrant, followed by cross-encoder re-ranking.
-- **Confidence Guardrails:** 3-band sigmoid confidence mechanism (`confident` $\ge 0.82$, `low_confidence` $0.60 \le s < 0.82$, `insufficient` $< 0.60$) ensuring out-of-corpus questions are deterministically refused.
-- **Ragas Benchmark Results:**
+- **Retrieval Pipeline & Hybrid Indexing:** Dense vector search (BAAI/bge-base-en-v1.5) and sparse lexical BM25 fused via **Reciprocal Rank Fusion (RRF)** in Qdrant, followed by cross-encoder neural reranking.
+- **Multi-Tenant Security & BOLA/IDOR Defense (Session 3):** Server-side tenant registry preventing forged `X-Tenant-Id` / `X-User-Role` headers, mandatory Qdrant payload filters during HNSW walk, pre-rerank candidate drop guards (preventing foreign text from entering cross-encoder context), citation resolution tenant authorization, and tenant-partitioned semantic cache namespaces (`v1:<tenant_id>:<hash>`).
+- **Confidence Guardrails & Safe Abstention:** 3-band calibrated sigmoid confidence mechanism (`confident` $\ge 0.82$, `low_confidence` $0.60 \le s < 0.82$, `insufficient` $< 0.60$) ensuring out-of-corpus questions are deterministically refused with escalation drafts.
+- **Regulatory Governance & Audit Chain:** EU AI Act (Art. 12/14/15) and ISO 42001 automated compliance checks, forward-linked HMAC SHA-256 audit ledger, and GDPR Article 17 right-to-erasure scanning engine.
+- **Ragas Benchmark Results & Observability:**
   - **Mean Faithfulness:** `0.97` across test batches.
   - **Refusal Accuracy:** `100%` on adversarial out-of-domain compliance inquiries.
-  - **Telemetry:** Complete step-by-step latency, token cost, and retrieval score tracing logged to **Langfuse**.
+  - **Telemetry:** End-to-end token cost, retrieval latency, and score telemetry traced to **Langfuse**.
 
 ---
 

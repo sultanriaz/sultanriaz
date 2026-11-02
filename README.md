@@ -116,7 +116,7 @@ Below is an in-depth inspection of flagship architectures engineered across ente
 #### 📊 Empirical Benchmark Results (MedFaith-Lab on NVIDIA T1200 GPU):
 | Condition | Architecture | Trie Mask | Guard | NFS (%) $\uparrow$ | SFS (%) $\uparrow$ | $\mathcal{G}_{\text{faith}}$ $\downarrow$ | Latency | VRAM Peak | Total Errors |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **C0** | Raw 1.5B (No Context) | ❌ | ❌ | 30.0% | 35.0% | +10.0% | 8.73s | 1,099 MB | 8 (Highest) |
+| **C0** | Raw 1.5B (No Context) | ❌ | ❌ | 20.0% | 25.0% | +8.0% | 12.92s | **1,124 MB** | 15 (Parametric Floor) |
 | **C1** | Standard RAG Baseline | ❌ | ❌ | 90.0% | 70.0% | +20.0% | 11.16s | 1,120 MB | 5 |
 | **C2** | Post-Hoc Guard Only | ❌ | ✅ | 97.3% | 80.0% | +17.3% | 11.42s | 1,120 MB | 4 |
 | **C3** | **Dynamic Prefix Trie Only** | ✅ | ❌ | **100.0%** | **85.0%** | **+15.0%** | **10.38s** | 1,146 MB | **3 (Lowest)** |

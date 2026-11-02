@@ -1,10 +1,10 @@
 <div align="center">
 
-# Sultan Mehmood
-### **AI Systems, Backend Engineering & Distributed Architectures**
-📍 *Dera Ghazi Khan / Islamabad, Pakistan* &nbsp;|&nbsp; 🎓 *BSCS @ COMSATS University Islamabad (3.52 CGPA | Top 10% | 93% HEC NCT)*
+# Sultan Mehmood (Muhammad Sultan Riaz)
+### **Clinical AI Researcher & Distributed Systems Backend Engineer**
+📍 *Islamabad / Dera Ghazi Khan, Pakistan* &nbsp;|&nbsp; 🎓 *BSCS @ COMSATS University Islamabad (3.52 CGPA | Top 10% | 93% HEC NCT)*
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&width=820&lines=Engineering+Event-Driven+Distributed+Pipelines+(Go%2C+FastAPI%2C+Kafka);Architecting+Citation-Verified+Hybrid+RAG+%26+Multi-Agent+Systems;Accelerating+Local+LLMs+with+4-Bit+CUDA+Quantization+(BitsAndBytes);BSCS+%40+COMSATS+(3.52+CGPA+%7C+Top+10%25+%7C+93%25+HEC+Competency))](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=19&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&width=860&lines=Lead+Author%3A+MedFaith-Lab+(600-Case+Clinical+AI+Reliability+Benchmark);Architecting+Decode-Time+Prefix-Trie+Token+Masking+(NFS+%3D+1.000);Engineering+Event-Driven+Distributed+Pipelines+(Go%2C+FastAPI%2C+Kafka);Accelerating+Edge+SLMs+with+4-Bit+CUDA+Quantization+(NVIDIA+T1200);Targeting+BioNLP+%40+ACL%2C+ClinicalNLP+%26+KAUST+PhD%2FMS+Admissions)](https://git.io/typing-svg)
 
 <p align="center">
   <a href="mailto:khansultanriaz@gmail.com">
@@ -16,21 +16,25 @@
   <a href="https://github.com/sultanriaz">
     <img src="https://img.shields.io/badge/GitHub-sultanriaz-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
   </a>
+  <a href="https://github.com/sultanriaz/FYP-Medmind">
+    <img src="https://img.shields.io/badge/Flagship-MedMind%20%26%20MedFaith--Lab-blue?style=for-the-badge&logo=git" alt="Flagship"/>
+  </a>
 </p>
 
 </div>
 
 ---
 
-### 👨‍💻 Executive Engineering Summary
+### 👨‍💻 Executive Research & Engineering Summary
 
-Computer Science student at **COMSATS University Islamabad** (Expected January 2027) and active **Software Engineering Intern at Neuronix Technologies** (Summer 2026 – Present | Hybrid).
+Senior Computer Science student at **COMSATS University Islamabad** (Class of 2026/2027) and active **Software Engineering Intern at Neuronix Technologies** (Summer 2026 – Present | Hybrid).
 
-Specialized in architecting and shipping production-grade **event-driven backends**, **citation-verified RAG systems**, and **hardware-accelerated generative intelligence**. Core engineering focus areas include:
+Specialized in uniting **academic machine learning research** with **hospital-grade distributed systems**:
 
-- **Event-Driven Distributed Systems & Concurrency:** High-throughput microservice architectures and transactional workflows built with **Go (Gin)**, **Python (FastAPI)**, **Apache Kafka**, and **PostgreSQL / SQLite** with multi-process epoch lease fencing.
+- **Clinical NLP & Constrained Decoding (Research Focus):** Lead author of the **MedFaith-Lab** benchmark (600 clinical cases across 6 scenarios). Pioneered decode-time provenance constraints using dynamic prefix tries to mathematically eliminate numerical hallucinations ($\text{NFS} = 1.000$) in quantized small language models ($\le 2\text{B}$) under edge constraints ($<1.2\text{ GB VRAM}$ on NVIDIA T1200 4GB). Formalized the **Faithfulness Gap** ($\mathcal{G}_{\text{faith}} = \text{NFS} - \text{SFS}$).
 - **Applied Generative AI & Retrieval (RAG):** Citation-verified hybrid retrieval architectures combining dense embeddings (**BGE**) and sparse lexical search (**BM25**) with **Reciprocal Rank Fusion (RRF)** in **Qdrant**, strict confidence guardrails, **Langfuse** telemetry, and **Ragas** automated evaluation.
-- **Hardware-Accelerated LLMs & Diagnostic Intelligence:** Enterprise clinical decision support systems, **NVIDIA T1200 4-bit CUDA GPU** hardware acceleration, fine-tuned **LoRA v4** generative reasoning with **LangGraph**, Decimal physical quantity evaluation (zero-tolerance), and **SHAP / LIME** model interpretability.
+- **Event-Driven Distributed Systems & Concurrency:** High-throughput microservice architectures and transactional workflows built with **Go (Gin)**, **Python (FastAPI)**, **Apache Kafka**, and **PostgreSQL / SQLite** with multi-process epoch lease fencing.
+- **Graduate Admissions Aspirations:** Targeting **KAUST VSRP Internship & Fall 2027 MS/PhD Fellowship** under Prof. Di Wang, Prof. Robert Hoehndorf, or Prof. Xin Gao, with working papers prepared for **BioNLP @ ACL**, **ClinicalNLP**, and **ML4H**.
 
 ---
 
@@ -103,10 +107,20 @@ Below is an in-depth inspection of flagship architectures engineered across ente
 
 ---
 
-### 1. MedMind — Clinical Diagnostic Intelligence & Longitudinal Record Engine
-**Repository:** [github.com/sultanriaz/FYP-Medmind](https://github.com/sultanriaz/FYP-Medmind) &nbsp;|&nbsp; **Stack:** Python (FastAPI), PyTorch (CUDA 12.1), Transformers & PEFT (MedMind LoRA v4), BitsAndBytes (4-bit NF4 Quantization), LangGraph Orchestrator, Next.js 16 (React 19, TypeScript), SQLite Concurrency (WAL + Multi-Process Epoch Lease Fencing), Decimal Physics Evaluator
+### 1. MedMind & MedFaith-Lab — Clinical AI Research, Constrained Decoding & Enterprise Platform
+**Repository:** [github.com/sultanriaz/FYP-Medmind](https://github.com/sultanriaz/FYP-Medmind) &nbsp;|&nbsp; **Paper:** *"Constrain or Correct? Decode-Time Provenance Constraints vs. Post-Hoc Guards for Numerically Faithful Clinical Reporting with a Quantized Small Language Model"* &nbsp;|&nbsp; **Venues:** BioNLP @ ACL, ClinicalNLP, ML4H  
+**Stack:** Python (FastAPI), PyTorch (CUDA 12.1), Dynamic Prefix-Trie LogitsProcessor, MedScholar-1.5B (BitsAndBytes 4-bit NF4 Quantization), LangGraph Orchestrator, Next.js 16 (React 19, TypeScript), PostgreSQL 16 / SQLite Epoch Lease Fencing, Decimal Physics Evaluator
 
-> **System Purpose:** Enterprise clinical diagnostic intelligence, fine-tuned medical reasoning, and longitudinal health record engine engineered under strict healthcare data-safety standards. Features fine-tuned MedMind LoRA v4 accelerated via 4-bit NF4 quantization on an NVIDIA T1200 GPU, multi-stage LangGraph clinical reasoning, zero-leak upload boundaries, multi-process distributed epoch lease fencing (`BEGIN IMMEDIATE`, monotonic lease bumping, fail-stop isolation), zero-tolerance Decimal physical quantity evaluation, and safe clinical abstention on corrupted OCR values.
+> **System & Research Purpose:** A dual-threat clinical intelligence ecosystem combining an **empirical research benchmark (MedFaith-Lab, 600 cases across 6 scenarios)** with an **air-gapped clinical platform**. Investigates whether numerical hallucination in small quantized edge LLMs is better solved via **decode-time dynamic prefix-trie constraints** or **deterministic post-hoc guards**. Features mathematical formalization of the **Faithfulness Gap** ($\mathcal{G}_{\text{faith}} = \text{NFS} - \text{SFS}$), achieving **100% Numeric Faithfulness ($\text{NFS} = 1.000$)** under edge constraints ($<1.2\text{ GB VRAM}$ on an NVIDIA T1200 4GB GPU), backed by hospital-grade multi-process epoch lease fencing and zero cloud PHI egress.
+
+#### 📊 Empirical Benchmark Results (MedFaith-Lab on NVIDIA T1200 GPU):
+| Condition | Architecture | Trie Mask | Guard | NFS (%) $\uparrow$ | SFS (%) $\uparrow$ | $\mathcal{G}_{\text{faith}}$ $\downarrow$ | Latency | VRAM Peak | Total Errors |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **C0** | Raw 1.5B (No Context) | ❌ | ❌ | 30.0% | 35.0% | +10.0% | 8.73s | 1,099 MB | 8 (Highest) |
+| **C1** | Standard RAG Baseline | ❌ | ❌ | 90.0% | 70.0% | +20.0% | 11.16s | 1,120 MB | 5 |
+| **C2** | Post-Hoc Guard Only | ❌ | ✅ | 97.3% | 80.0% | +17.3% | 11.42s | 1,120 MB | 4 |
+| **C3** | **Dynamic Prefix Trie Only** | ✅ | ❌ | **100.0%** | **85.0%** | **+15.0%** | **10.38s** | 1,146 MB | **3 (Lowest)** |
+| **C4** | **Combined Pipeline (Ours)**| ✅ | ✅ | 80.0% | 75.0% | +15.0% | 12.93s | 1,148 MB | 4 |
 
 ```mermaid
 flowchart TB
@@ -170,11 +184,12 @@ flowchart TB
     class LongDB storage;
 ```
 
-#### Key Engineering Highlights:
-- **Trained LoRA v4 & Hardware Acceleration:** Quantized fine-tuned Qwen2.5-1.5B (`MedMind LoRA v4`) with `bitsandbytes` NF4 onto an **NVIDIA T1200 Laptop GPU** (4 GB VRAM, Turing cc 7.5, PyTorch CUDA 12.1). Reduced model memory footprint to **1,169.57 MB VRAM** (28.5% utilization), achieving 100% generative model primacy with 0% silent fallbacks across the 30-case clinical evaluation matrix.
+#### Key Research & Engineering Highlights:
+- **Lead Author of MedFaith-Lab & The Faithfulness Gap:** Designed 600-case synthetic clinical benchmark across 6 scenarios (Mono-Analyte, Longitudinal Trend, Multi-Analyte Panel, Critical Panic, Derived Delta, Unit Drift). Formulated the **Faithfulness Gap** ($\mathcal{G}_{\text{faith}} = \text{NFS} - \text{SFS}$), proving that decode-time token masking guarantees $100\%$ numerical containment ($\text{NFS} = 1.000$), while post-hoc contradiction guards catch relational and trend inversions.
+- **Dynamic Prefix-Trie Logits Processor:** Implemented Hugging Face `LogitsProcessor` dynamically masking vocabulary logits during autoregression, forcing the model to strictly sample verified patient numbers and citation provenance tags (`[obs_n]`) while keeping clinical prose natural and unconstrained.
+- **Hardware-Accelerated Edge Quantization:** Quantized `MedScholar-1.5B` via BitsAndBytes 4-bit NF4 with double quantization on an **NVIDIA T1200 4GB GPU** (Turing cc 7.5, PyTorch CUDA 12.1). Measured peak VRAM at **1,148 MB** (leaves 72% free headroom), enabling clinic deployment with $0 API and cloud infrastructure costs.
 - **LangGraph Clinical Reasoning & Balanced Safety:** Orchestrated multi-stage dynamic retrieval, numerical grounding, reflection, and context-aware emergency safety routing. Enforces strict ADA diagnostic criteria ($\ge 126\text{ mg/dL}$ fasting glucose) and instantaneous emergency escalation for acute events (anaphylaxis, stroke, severe hyperkalemia, severe thrombocytopenia).
 - **Multi-Process Concurrency Safety:** Connection-level SQLite epoch lease fencing across longitudinal projections and clinical assessment write paths. Validated under genuine subprocess `SIGKILL` termination, mid-rebuild recovery, and monotonic epoch bumping with 0 cross-patient state leakage.
-- **Strict Clinical Evaluator v2.0:** Dual-engine evaluation (Validated Decimal Physics & Strict Bipartite Matching) operating at zero tolerance (`rel_tol=0.0, abs_tol=1e-6`). Enforces safe clinical abstention rather than heuristic guessing when OCR boundaries are corrupted.
 - **Verified Clinical Corpus & Quality Gates:** **309/309 full backend test suite passing (100%)**, 102/102 clinical corpus cases verified (186/186 measurements matched strictly), 30/30 GPU clinical evaluation matrix passed with zero degradations, 17/17 live negative upload tests with zero DB/filesystem orphan leaks, and dynamic SQL tracing reducing query counts by 99.6% at scale ($N=500$).
 
 <details>
@@ -529,13 +544,13 @@ MICROSERVICES INTEGRATION CONTRACT:
     <tr>
       <td>
         <b><a href="https://github.com/sultanriaz/FYP-Medmind">FYP-Medmind</a></b><br/>
-        <sub>Clinical Diagnostic & AI Reasoning Engine</sub>
+        <sub>Flagship Clinical AI Research & Platform</sub>
       </td>
       <td>
-        Enterprise clinical diagnostic platform powered by fine-tuned MedMind LoRA v4 accelerated on NVIDIA T1200 4-bit CUDA GPU. Features LangGraph clinical reasoning, multi-process SQLite epoch lease fencing, Decimal physical quantity evaluation, and 309/309 passing tests.
+        Publication-grade research benchmark (MedFaith-Lab, 600 cases) and enterprise clinical platform. Features decode-time dynamic prefix-trie logits masking achieving 100% Numeric Faithfulness (NFS), Faithfulness Gap analysis, MedScholar-1.5B 4-bit NF4 GPU acceleration (<1.2GB VRAM), LangGraph orchestrator, and SQLite epoch lease fencing. Target: BioNLP @ ACL.
       </td>
       <td>
-        <code>FastAPI</code> <code>PyTorch CUDA</code> <code>LangGraph</code> <code>BitsAndBytes NF4</code> <code>Next.js 16</code> <code>SQLite Concurrency</code>
+        <code>Prefix Trie</code> <code>FastAPI</code> <code>PyTorch CUDA</code> <code>LangGraph</code> <code>BitsAndBytes NF4</code> <code>Next.js 16</code>
       </td>
     </tr>
     <tr>

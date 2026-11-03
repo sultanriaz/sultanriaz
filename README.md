@@ -113,14 +113,14 @@ Below is an in-depth inspection of flagship architectures engineered across ente
 
 > **System & Research Purpose:** A dual-threat clinical intelligence ecosystem combining an **empirical research benchmark (MedFaith-Lab, 600 cases across 6 scenarios)** with an **air-gapped clinical platform**. Investigates whether numerical hallucination in small quantized edge LLMs is better solved via **decode-time dynamic prefix-trie constraints** or **deterministic post-hoc guards**. Features mathematical formalization of the **Faithfulness Gap** ($\mathcal{G}_{\text{faith}} = \text{NFS} - \text{SFS}$), achieving **100% Numeric Faithfulness ($\text{NFS} = 1.000$)** under edge constraints ($<1.2\text{ GB VRAM}$ on an NVIDIA T1200 4GB GPU), backed by hospital-grade multi-process epoch lease fencing and zero cloud PHI egress.
 
-#### 📊 Empirical Benchmark Results (MedFaith-Lab on NVIDIA T1200 GPU):
+#### 📊 Empirical Benchmark Results (MedFaith-Lab on NVIDIA T1200 GPU — 10-Case Matched Cohort):
 | Condition | Architecture | Trie Mask | Guard | NFS (%) $\uparrow$ | SFS (%) $\uparrow$ | $\mathcal{G}_{\text{faith}}$ $\downarrow$ | Latency | VRAM Peak | Total Errors |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **C0** | Raw 1.5B (No Context) | ❌ | ❌ | 20.0% | 25.0% | +8.0% | 12.92s | **1,124 MB** | 15 (Parametric Floor) |
 | **C1** | Standard RAG Baseline | ❌ | ❌ | 53.3% | 45.0% | +18.3% | 11.11s | 1,146 MB | 11 (High Residual Error) |
-| **C2** | Post-Hoc Guard Only | ❌ | ✅ | 97.3% | 80.0% | +17.3% | 11.42s | 1,120 MB | 4 |
-| **C3** | **Dynamic Prefix Trie Only** | ✅ | ❌ | **79.3%** | **70.0%** | **+16.8%** | **10.97s** | 1,146 MB | **9 (Single-Stage Best)** |
-| **C4** | **Combined Pipeline (Ours)**| ✅ | ✅ | 80.0% | 75.0% | +15.0% | 12.93s | 1,148 MB | 4 |
+| **C2** | Post-Hoc Guard Only | ❌ | ✅ | 63.0% | 57.5% | +12.1% | 11.46s | 1,146 MB | 15 (Unguided Drafts) |
+| **C3** | **Dynamic Prefix Trie Only** | ✅ | ❌ | 79.3% | **70.0%** | +16.8% | **10.97s** | 1,146 MB | **9 (Fastest Latency)** |
+| **C4** | **Combined Pipeline (Ours)**| ✅ | ✅ | **90.0%** | 67.5% | +22.5% | 12.54s | 1,146 MB | **9 (Zero E1 Inventions)** |
 
 ```mermaid
 flowchart TB

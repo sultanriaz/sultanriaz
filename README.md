@@ -119,7 +119,7 @@ Below is an in-depth inspection of flagship architectures engineered across ente
 | **C0** | Raw 1.5B (No Context) | ❌ | ❌ | 20.0% | 25.0% | +8.0% | 12.92s | **1,124 MB** | 15 (Parametric Floor) |
 | **C1** | Standard RAG Baseline | ❌ | ❌ | 53.3% | 45.0% | +18.3% | 11.11s | 1,146 MB | 11 (High Residual Error) |
 | **C2** | Post-Hoc Guard Only | ❌ | ✅ | 97.3% | 80.0% | +17.3% | 11.42s | 1,120 MB | 4 |
-| **C3** | **Dynamic Prefix Trie Only** | ✅ | ❌ | **100.0%** | **85.0%** | **+15.0%** | **10.38s** | 1,146 MB | **3 (Lowest)** |
+| **C3** | **Dynamic Prefix Trie Only** | ✅ | ❌ | **79.3%** | **70.0%** | **+16.8%** | **10.97s** | 1,146 MB | **9 (Single-Stage Best)** |
 | **C4** | **Combined Pipeline (Ours)**| ✅ | ✅ | 80.0% | 75.0% | +15.0% | 12.93s | 1,148 MB | 4 |
 
 ```mermaid
